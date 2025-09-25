@@ -7,6 +7,7 @@ import {
   StyleSheet,
   Alert,
   ActivityIndicator,
+  Platform
 } from 'react-native';
 import { useAuth } from '../contexts/AuthContext';
 import api from '../services/api';
@@ -19,8 +20,14 @@ const Login = ({ navigation }) => {
 
   const handleLogin = async () => {
     if (!email || !password) {
-      Alert.alert('Error', 'Por favor completa todos los campos');
-      return;
+      if (Platform.OS === 'web') {
+        alert('Error: Por favor completa todos los campos');
+        return;
+      }else{
+        Alert.alert('Error', 'Por favor completa todos los campos');
+        return;
+      }
+      
     }
 
     setIsLoading(true);
@@ -34,7 +41,13 @@ const Login = ({ navigation }) => {
       await signIn(token);
     } catch (error) {
       console.error('Error login:', error.response?.data || error.message);
-      Alert.alert('Error', 'Credenciales incorrectas o error del servidor');
+
+      if (Platform.OS === 'web') {
+        alert('Error: Credenciales incorrectas o error del servidor');
+      }else{
+        Alert.alert('Error', 'Credenciales incorrectas o error del servidor');
+      }
+      
     } finally {
       setIsLoading(false);
     }

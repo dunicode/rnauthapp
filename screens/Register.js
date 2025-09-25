@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+
 import {
   View,
   Text,
@@ -7,6 +8,7 @@ import {
   StyleSheet,
   Alert,
   ActivityIndicator,
+  Platform
 } from 'react-native';
 import api from '../services/api';
 
@@ -14,12 +16,28 @@ const Register = ({ navigation }) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [password_confirm, setPasswordConfirm] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
   const handleRegister = async () => {
-    if (!name || !email || !password) {
-      Alert.alert('Error', 'Por favor completa todos los campos');
-      return;
+    if (!name || !email || !password || !password_confirm) {
+      if (Platform.OS === 'web') {
+        alert('Error: Por favor completa todos los campos');
+        return;
+      }else{
+        Alert.alert('Error', 'Por favor completa todos los campos');
+        return;
+      }
+    }
+
+    if (password != password_confirm) {
+      if (Platform.OS === 'web') {
+        alert('Error: Las contraseñas no coinciden');
+        return;
+      }else{
+        Alert.alert('Error', 'Las contraseñas no coinciden');
+        return;
+      }
     }
 
     setIsLoading(true);
@@ -30,14 +48,24 @@ const Register = ({ navigation }) => {
         password,
       });
 
-      Alert.alert(
-        'Éxito', 
-        'Registro completado. Por favor inicia sesión.',
-        [{ text: 'OK', onPress: () => navigation.navigate('Login') }]
-      );
+      if (Platform.OS === 'web') {
+        alert('Registro completado. Por favor inicia sesión.');
+        navigation.navigate('Login')
+      }else{
+        Alert.alert(
+          'Éxito', 
+          'Registro completado. Por favor inicia sesión.',
+          [{ text: 'OK', onPress: () => navigation.navigate('Login') }]
+        );
+      }
+      
     } catch (error) {
       console.error('Error registro:', error.response?.data || error.message);
-      Alert.alert('Error', 'Error en el registro. Verifica los datos.');
+      if (Platform.OS === 'web') {
+        alert('Error: Error en el registro. Verifica los datos.');
+      }else{
+        Alert.alert('Error', 'Error en el registro. Verifica los datos.');
+      }      
     } finally {
       setIsLoading(false);
     }
@@ -70,6 +98,15 @@ const Register = ({ navigation }) => {
         placeholder="Password"
         value={password}
         onChangeText={setPassword}
+        secureTextEntry
+        editable={!isLoading}
+      />
+
+      <TextInput
+        style={styles.input}
+        placeholder="Password Confirm"
+        value={password_confirm}
+        onChangeText={setPasswordConfirm}
         secureTextEntry
         editable={!isLoading}
       />

@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, Button, Alert } from 'react-native';
+import { View, Text, StyleSheet, Button, Alert, Platform } from 'react-native';
 import { useAuth } from '../contexts/AuthContext';
 import api from '../services/api';
 
@@ -7,29 +7,46 @@ const Home = () => {
   const { signOut } = useAuth();
 
   const handleLogout = async () => {
-    Alert.alert(
-      'Cerrar Sesión',
-      '¿Estás seguro de que quieres cerrar sesión?',
-      [
-        {
-          text: 'Cancelar',
-          style: 'cancel',
-        },
-        {
-          text: 'Cerrar Sesión',
-          onPress: async () => {
-            try {
-              // Opcional: llamar al endpoint de logout de tu API si existe
-              // await api.post('/auth/logout');
-            } catch (error) {
-              console.error('Error logout:', error);
-            } finally {
-              await signOut();
-            }
+    if (Platform.OS === 'web') {
+      let action = confirm("Are you sure you want to proceed?");
+      if (action) {
+        (async () => {
+          try {
+            // Opcional: llamar al endpoint de logout de tu API si existe
+            await api.post('/auth/logout');
+          } catch (error) {
+            console.error('Error logout:', error);
+          } finally {
+            await signOut();
+          }
+        })();
+      }
+    }else{
+      Alert.alert(
+        'Cerrar Sesión',
+        '¿Estás seguro de que quieres cerrar sesión?',
+        [
+          {
+            text: 'Cancelar',
+            style: 'cancel',
           },
-        },
-      ]
-    );
+          {
+            text: 'Cerrar Sesión',
+            onPress: async () => {
+              try {
+                // Opcional: llamar al endpoint de logout de tu API si existe
+                await api.post('/auth/logout');
+              } catch (error) {
+                console.error('Error logout:', error);
+              } finally {
+                await signOut();
+              }
+            },
+          },
+        ]
+      );
+    }
+    
   };
 
   const testAuthRequest = async () => {
