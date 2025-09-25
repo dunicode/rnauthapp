@@ -14,11 +14,17 @@ const Register = ({ navigation }) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [password_confirm, setPasswordConfirm] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
   const handleRegister = async () => {
-    if (!name || !email || !password) {
+    if (!name || !email || !password || !password_confirm) {
       Alert.alert('Error', 'Por favor completa todos los campos');
+      return;
+    }
+
+    if (password != password_confirm) {
+      Alert.alert('Error', 'Las contraseñas no coinciden');
       return;
     }
 
@@ -70,6 +76,15 @@ const Register = ({ navigation }) => {
         placeholder="Password"
         value={password}
         onChangeText={setPassword}
+        secureTextEntry
+        editable={!isLoading}
+      />
+
+      <TextInput
+        style={styles.input}
+        placeholder="Password Confirm"
+        value={password_confirm}
+        onChangeText={setPasswordConfirm}
         secureTextEntry
         editable={!isLoading}
       />
