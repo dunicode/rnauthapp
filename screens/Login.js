@@ -33,7 +33,6 @@ const Login = ({ navigation }) => {
       const token = response.data.access_token;
       await signIn(token);
     } catch (error) {
-      console.error('Error login:', error.response?.data || error.message);
       Alert.alert('Error', 'Credenciales incorrectas o error del servidor');
     } finally {
       setIsLoading(false);
