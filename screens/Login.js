@@ -45,7 +45,7 @@ const Login = ({ navigation }) => {
       
       <TextInput
         style={styles.input}
-        placeholder="Email"
+        placeholder="Correo Electrónico"
         value={email}
         onChangeText={setEmail}
         autoCapitalize="none"
@@ -55,7 +55,7 @@ const Login = ({ navigation }) => {
       
       <TextInput
         style={styles.input}
-        placeholder="Password"
+        placeholder="Contraseña"
         value={password}
         onChangeText={setPassword}
         secureTextEntry
@@ -66,7 +66,7 @@ const Login = ({ navigation }) => {
         <ActivityIndicator size="large" color="#007bff" />
       ) : (
         <TouchableOpacity style={styles.button} onPress={handleLogin}>
-          <Text style={styles.buttonText}>Login</Text>
+          <Text style={styles.buttonText}>Iniciar Session</Text>
         </TouchableOpacity>
       )}
       

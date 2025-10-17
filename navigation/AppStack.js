@@ -1,14 +1,33 @@
 import React from 'react';
-import { createStackNavigator } from '@react-navigation/stack';
 import Home from '../screens/Home';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import Profile from '../screens/Profile';
+import { Ionicons } from '@expo/vector-icons'; // o la librería de iconos que prefieras
 
-const Stack = createStackNavigator();
+const Tab = createBottomTabNavigator();
 
 const AppStack = () => {
   return (
-    <Stack.Navigator screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="Home" component={Home} />
-    </Stack.Navigator>
+    <Tab.Navigator screenOptions={{ headerShown: false }}>
+      <Tab.Screen 
+        name="Home" 
+        component={Home} 
+        options={{tabBarIcon: ({ color, size }) => (
+          <Ionicons name="home" size={size} color={color} />
+        ),
+        tabBarLabel: 'Inicio',
+        }} 
+      />
+      <Tab.Screen 
+        name="Profile" 
+        component={Profile} 
+        options={{tabBarIcon: ({ color, size }) => (
+          <Ionicons name="person" size={size} color={color} />
+        ),
+        tabBarLabel: 'Perfil',
+        }}
+      />
+    </Tab.Navigator>
   );
 };
 
