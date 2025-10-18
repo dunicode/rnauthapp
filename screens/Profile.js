@@ -1,7 +1,8 @@
-import { View, Button, StyleSheet, Alert, Text } from 'react-native'
+import { View, Button, StyleSheet, Alert, Text, StatusBar } from 'react-native'
 import { useEffect, useState } from 'react'
 import { useAuth } from '../contexts/AuthContext';
 import api from '../services/api';
+import mainStyles from '../styles/mainStyles';
 
 export default function Profile() {
     const { signOut } = useAuth();
@@ -14,7 +15,6 @@ export default function Profile() {
         try {
           const response = await api.get('/auth/profile');
           setProfileData(response.data);
-          console.log(response.data);
         } catch (error) {
           Alert.alert('Error', 'Error en petición autenticada');
           console.error('Auth request error:', error);
@@ -54,12 +54,13 @@ export default function Profile() {
 
     return (
         <View style={styles.container}>
-            
-            <View style={styles.buttonContainer}>
+            <StatusBar backgroundColor="#fff" barStyle="dark-content" translucent={false}/>
+
+            <View style={mainStyles.card}>
                 <Text style={styles.title}>Perfil de Usuario</Text>
                 <Text style={styles.subtitle}>Nombre: {profileData.name || ""}</Text>
                 <Text style={styles.subtitle}>Email: {profileData.email || ""}</Text>
-                <View style={styles.spacer} />
+                <View style={mainStyles.spacer} />
                 <Button title="Cerrar Sesión" onPress={handleLogout} color="red" />
             </View>
         </View>
@@ -68,10 +69,10 @@ export default function Profile() {
 
 const styles = StyleSheet.create({
   container: {
+    paddingTop: StatusBar.currentHeight,
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: 'top',
     alignItems: 'center',
-    padding: 20,
   },
   title: {
     fontSize: 24,
@@ -84,8 +85,5 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     width: '80%',
-  },
-  spacer: {
-    height: 10,
   },
 });
