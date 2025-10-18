@@ -59,9 +59,13 @@ export default function Profile() {
             <View style={mainStyles.card}>
                 <Text style={styles.title}>Perfil de Usuario</Text>
                 <Text style={styles.subtitle}>Nombre: {profileData.name || ""}</Text>
-                <Text style={styles.subtitle}>Email: {profileData.email || ""}</Text>
+                <Text style={styles.subtitle}>Email: {profileData.email || ""}</Text>              
+            </View>
+
+            <View style={mainStyles.card}>
+                <Text style={styles.title}>Opciones</Text>
                 <View style={mainStyles.spacer} />
-                <Button title="Cerrar Sesión" onPress={handleLogout} color="red" />
+                <Button title="Cerrar Sesión" onPress={handleLogout} color="gray" />
             </View>
         </View>
     )
