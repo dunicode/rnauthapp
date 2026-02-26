@@ -25,7 +25,7 @@ const Login = ({ navigation }) => {
 
     setIsLoading(true);
     try {
-      const response = await api.post('/auth/login', {
+      const response = await api.post('/auth/login/', {
         email,
         password,
       });
@@ -33,6 +33,7 @@ const Login = ({ navigation }) => {
       const token = response.data.access_token;
       await signIn(token);
     } catch (error) {
+      console.log(error.message)
       Alert.alert('Error', 'Credenciales incorrectas o error del servidor');
     } finally {
       setIsLoading(false);
@@ -59,6 +60,7 @@ const Login = ({ navigation }) => {
         value={password}
         onChangeText={setPassword}
         secureTextEntry
+        autoCapitalize="none"
         editable={!isLoading}
       />
       
