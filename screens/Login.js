@@ -30,7 +30,7 @@ const Login = ({ navigation }) => {
         password,
       });
 
-      const token = response.data.access_token;
+      const token = response.data.token;
       await signIn(token);
     } catch (error) {
       console.log(error.message)
