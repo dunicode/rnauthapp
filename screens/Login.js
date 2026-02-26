@@ -42,11 +42,12 @@ const Login = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Iniciar Sesión</Text>
+      <Text style={styles.title}>BotApp</Text>
       
       <TextInput
         style={styles.input}
-        placeholder="Correo Electrónico"
+        placeholder="Email"
+        placeholderTextColor="gray"
         value={email}
         onChangeText={setEmail}
         autoCapitalize="none"
@@ -56,7 +57,7 @@ const Login = ({ navigation }) => {
       
       <TextInput
         style={styles.input}
-        placeholder="Contraseña"
+        placeholder="Password"
         value={password}
         onChangeText={setPassword}
         secureTextEntry
@@ -68,13 +69,9 @@ const Login = ({ navigation }) => {
         <ActivityIndicator size="large" color="#007bff" />
       ) : (
         <TouchableOpacity style={styles.button} onPress={handleLogin}>
-          <Text style={styles.buttonText}>Iniciar Session</Text>
+          <Text style={styles.buttonText}>Login</Text>
         </TouchableOpacity>
       )}
-      
-      <TouchableOpacity onPress={() => navigation.navigate('Register')} disabled={isLoading}>
-        <Text style={styles.link}>¿No tienes cuenta? Regístrate</Text>
-      </TouchableOpacity>
     </View>
   );
 };
@@ -97,6 +94,7 @@ const styles = StyleSheet.create({
     marginBottom: 15,
     paddingHorizontal: 10,
     borderRadius: 5,
+    color: '#000'
   },
   button: {
     backgroundColor: '#007bff',

@@ -7,13 +7,14 @@ import mainStyles from '../styles/mainStyles';
 export default function Profile() {
     const { signOut } = useAuth();
     const [profileData, setProfileData] = useState({
-        name: '',
+        username: '',
         email: ''
     });
 
     const getProfileData = async () => {
         try {
           const response = await api.get('/auth/profile/');
+          console.log(response)
           setProfileData(response.data);
         } catch (error) {
           Alert.alert('Error', 'Error en petición autenticada');
@@ -57,13 +58,13 @@ export default function Profile() {
             <StatusBar backgroundColor="#fff" barStyle="dark-content" translucent={false}/>
 
             <View style={mainStyles.card}>
-                <Text style={styles.title}>Perfil de Usuario</Text>
-                <Text style={styles.subtitle}>Nombre: {profileData.name || ""}</Text>
+                <Text style={styles.title}>Profile</Text>
+                <Text style={styles.subtitle}>Username: {profileData.username || ""}</Text>
                 <Text style={styles.subtitle}>Email: {profileData.email || ""}</Text>              
             </View>
 
             <View style={mainStyles.card}>
-                <Text style={styles.title}>Opciones</Text>
+                <Text style={styles.title}>Options</Text>
                 <View style={mainStyles.spacer} />
                 <Button title="Cerrar Sesión" onPress={handleLogout} color="gray" />
             </View>

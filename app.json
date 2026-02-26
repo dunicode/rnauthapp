@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "AuthApp",
-    "slug": "AuthApp",
+    "name": "BotRnApp",
+    "slug": "BotRnApp",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",

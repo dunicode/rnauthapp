@@ -3,8 +3,8 @@ import { View, Text, StyleSheet } from 'react-native';
 const Home = () => {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Bienvenido a Home</Text>
-      <Text style={styles.subtitle}>Sesión iniciada correctamente</Text>
+      <Text style={styles.title}>Welcome</Text>
+      <Text style={styles.subtitle}>Bot manager system</Text>
     </View>
   );
 };
