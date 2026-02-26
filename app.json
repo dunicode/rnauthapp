@@ -20,7 +20,8 @@
         "foregroundImage": "./assets/ic_launcher_foreground.png",
         "backgroundColor": "#ffffff"
       },
-      "edgeToEdgeEnabled": true
+      "edgeToEdgeEnabled": true,
+      "package": "com.anonymous.AuthApp"
     },
     "web": {
       "favicon": "./assets/favicon.png"
