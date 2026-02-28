@@ -14,7 +14,6 @@ export default function Profile() {
     const getProfileData = async () => {
         try {
           const response = await api.get('/auth/profile/');
-          console.log(response)
           setProfileData(response.data);
         } catch (error) {
           Alert.alert('Error', 'Error en petición autenticada');
