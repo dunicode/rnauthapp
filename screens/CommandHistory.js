@@ -56,7 +56,7 @@ const CommandHistory = ({ navigation }) => {
         >
             <View style={styles.commandContent}>
                 <Text style={styles.commandName}>
-                    {item.command_name || 'Comando sin nombre'}
+                    {item.command_name + " (" + item.raspberry_name + ")" || 'Comando sin nombre'}
                 </Text>
                 {item.description && (
                     <Text style={styles.commandDescription}>
