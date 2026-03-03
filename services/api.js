@@ -1,5 +1,6 @@
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Alert } from 'react-native'; // Importamos Alert
 
 const api = axios.create({
   baseURL: process.env.EXPO_PUBLIC_API_URL,
@@ -30,7 +31,12 @@ api.interceptors.response.use(
     if (error.response.status === 401) {
       // Token inválido o expirado, cerramos sesión
       await AsyncStorage.removeItem('userToken');
-      // Podrías redirigir al login aquí si tienes acceso a navigation
+      
+      Alert.alert(
+        "Sesión Expirada",
+        "Tu sesión ha terminado. Por favor, ingresa de nuevo.",
+        [{ text: "OK" }]
+      );
     }
     return Promise.reject(error);
   }

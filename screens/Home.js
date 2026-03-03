@@ -1,10 +1,25 @@
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Button } from 'react-native';
 
-const Home = () => {
+const Home = ({ navigation }) => {
+  
+  const handleButtonPress = (item) => {
+        // Muestra en consola la información del comando seleccionado
+        navigation.navigate('Create', {
+            commandId: item.id,
+            commandName: item.command_name
+        });
+    };
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Welcome</Text>
       <Text style={styles.subtitle}>Bot manager system</Text>
+      <Button
+        onPress={handleButtonPress}
+        title="Run Command"
+        color="#08defa"
+        accessibilityLabel="Learn more about this purple button"
+      />
     </View>
   );
 };
