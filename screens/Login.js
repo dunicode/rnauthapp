@@ -58,6 +58,7 @@ const Login = ({ navigation }) => {
       <TextInput
         style={styles.input}
         placeholder="Password"
+        placeholderTextColor="gray"
         value={password}
         onChangeText={setPassword}
         secureTextEntry
